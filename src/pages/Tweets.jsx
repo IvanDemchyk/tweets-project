@@ -1,3 +1,4 @@
+import { Filter } from "components/Filter/Filter";
 import { LoadButton } from "components/LoadButton/LoadButton";
 import { TweetsList } from "components/TweetsList/TweetsList";
 import { useState, useEffect } from "react";
@@ -11,6 +12,7 @@ const Tweets = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [filter, setFilter] = useState("show all");
   const location = useLocation();
   const backLink = location?.state?.from ?? "/";
 
@@ -38,12 +40,33 @@ const Tweets = () => {
     }
   };
 
+  const filterUsers = (user) => {
+    switch (filter) {
+      case "show all":
+        return true;
+      case "follow":
+        return !user.following;
+      case "following":
+        return user.following;
+      default:
+        return false;
+    }
+  };
+
+  const changeFilter = (evt) => {
+    setFilter(evt.target.value);
+  };
+  console.log(filter);
+  const filteredUsers = users.filter(filterUsers);
+  console.log(filteredUsers);
+
   return (
     <div>
       <Link to={backLink}>Back</Link>
+      <Filter value={filter} onChange={changeFilter} />
       {isLoading && "Loading..."}
       {error && <div>{error}</div>}
-      {users && <TweetsList users={users} />}
+      {users && <TweetsList users={filteredUsers} />}
       <LoadButton onClick={getMoreUsers} />
     </div>
   );
