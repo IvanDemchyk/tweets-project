@@ -2,9 +2,10 @@ import { Filter } from "components/Filter/Filter";
 import { LoadButton } from "components/LoadButton/LoadButton";
 import { TweetsList } from "components/TweetsList/TweetsList";
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { getUsers } from "services/tweets-api";
+import { Wrapper, BackLink } from "components/Layout/Layout.styled";
 
 let page = 1;
 
@@ -56,19 +57,21 @@ const Tweets = () => {
   const changeFilter = (evt) => {
     setFilter(evt.target.value);
   };
-  console.log(filter);
+
   const filteredUsers = users.filter(filterUsers);
-  console.log(filteredUsers);
 
   return (
-    <div>
-      <Link to={backLink}>Back</Link>
-      <Filter value={filter} onChange={changeFilter} />
+    <>
+      <Wrapper>
+        <BackLink to={backLink}>Back</BackLink>
+        <Filter value={filter} onChange={changeFilter} />
+      </Wrapper>
+
       {isLoading && "Loading..."}
       {error && <div>{error}</div>}
       {users && <TweetsList users={filteredUsers} />}
       <LoadButton onClick={getMoreUsers} />
-    </div>
+    </>
   );
 };
 export default Tweets;

@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { NumberFormat } from "services/number-format";
 import { followTweet } from "services/tweets-api";
 
+import {
+  TweetBox,
+  AvatarImg,
+  StatsBox,
+  StatsText,
+  TweetButton,
+} from "./TweetItem.styled";
+
 export const TweetItem = ({ user }) => {
   const [isFollowing, setIsFollowing] = useState(user.following);
   const [followers, setFollowers] = useState(user.followers);
@@ -42,13 +50,16 @@ export const TweetItem = ({ user }) => {
   const { avatar, tweets } = user;
 
   return (
-    <li>
-      <img src={avatar} alt={user} />
-      <p>{tweets} TWEETS</p>
-      <p>{NumberFormat(followers)} FOLLOWERS</p>
-      <button isfollowing={isFollowing.toString()} onClick={toggleButton}>
+    <TweetBox>
+      <AvatarImg src={avatar} alt={user} />
+      <StatsBox>
+        <StatsText>{tweets} TWEETS</StatsText>
+        <StatsText>{NumberFormat(followers)} FOLLOWERS</StatsText>
+      </StatsBox>
+
+      <TweetButton isfollowing={isFollowing.toString()} onClick={toggleButton}>
         {isFollowing ? "Following" : "Follow"}
-      </button>
-    </li>
+      </TweetButton>
+    </TweetBox>
   );
 };

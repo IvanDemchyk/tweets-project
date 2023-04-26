@@ -1,9 +1,11 @@
+import { Select, Option } from "./Filter.syled";
+
 export const Filter = ({ filter, onChange }) => {
   return (
-    <select name="dropdown" id="dropdown" value={filter} onChange={onChange}>
-      <option value="show all">Show all</option>
-      <option value="follow">Follow</option>
-      <option value="following">Following</option>
-    </select>
+    <Select name="dropdown" id="dropdown" value={filter} onChange={onChange}>
+      <Option value="show all">Show all</Option>
+      <Option value="follow">Follow</Option>
+      <Option value="following">Following</Option>
+    </Select>
   );
 };

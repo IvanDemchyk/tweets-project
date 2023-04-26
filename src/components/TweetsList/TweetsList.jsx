@@ -1,11 +1,15 @@
 import { TweetItem } from "components/TweetItem/TweetItem";
 
+import { List } from "./TweetList.styled";
+
 export const TweetsList = ({ users }) => {
   return (
-    <ul>
+    <List>
       {users.map((user) => (
-        <TweetItem key={user.id} user={user} />
+        <li key={user.id}>
+          <TweetItem user={user} />
+        </li>
       ))}
-    </ul>
+    </List>
   );
 };

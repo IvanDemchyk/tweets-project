@@ -1,14 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { Header, HeaderWrapper, Link } from "./NavBar.styled";
 
 export const NavBar = () => {
   return (
-    <header>
-      <div>
-        <NavLink to="/" end>
+    <Header>
+      <HeaderWrapper>
+        <Link to="/" end>
           Home
-        </NavLink>
-        <NavLink to="/tweets">Tweets</NavLink>
-      </div>
-    </header>
+        </Link>
+        <Link to="/tweets">Tweets</Link>
+      </HeaderWrapper>
+    </Header>
   );
 };
